@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>С ним на ты. Расчёт для женщин</title>
+    </head>
+    <body>
+        <style>
+
+            body{
+                background-color: #fad2df;
+                color: #85354f;
+                font-family: 'Tahoma';
+                
+            }
+            .container {
+                max-width: 1200px;
+                display: flex;
+                margin: 0 auto;
+                flex-direction: row;
+            }
+            input{
+                margin-right: 10px;
+                margin-left: 10px;
+                background-color: #fad2df;
+                border-color: #85354f;
+                padding: 2px 3px;
+                margin-top: 3px;
+                border-radius: 3px;
+                color: #85354f;
+            }
+            button{
+                background-color: #fad2df;
+                border-color: #85354f;
+                color: #85354f;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 10px;
+
+            }
+            button:hover{
+                box-shadow: 7px 3px 3px #49202d;
+                background-color: #d6a5b4;
+            }
+
+        </style>
+
+        <h2>Расчёт для женщин</h2>
+        <p><i>(Введите значения из таблицы. Где стоит прочерк, поставьте "-" Поля "Тип" оставьте пустыми, они заполнятся автоматически)</i></p>
+        <div class="container">
+            <div>
+                
+                <h3>Внешний квадрат</h3>
+                <label for="temp">Темперамент</label>
+                <input type="text" id="temp" /><br /> Тип:<input type="text" id="temp2" disabled="disabled"/><br /><br />
+                <label for="cel">Цель</label>
+                <input type="text" id="cel" /><br />Тип:<input type="text" id="cel2" disabled="disabled"/><br /><br />
+                <label for="fam">Семья</label>
+                <input type="text" id="fam" /><br />Тип:<input type="text" id="fam2" disabled="disabled"/><br /><br />
+                <label for="priv">Привычки</label>
+                <input type="text" id="priv" /><br />Тип:<input type="text" id="priv2" disabled="disabled"/>
+
+                <h3>Внутренний квадрат</h3>
+                <label for="char">Характер</label>
+                <input type="text" id="char" /><br /> Тип:<input type="text" id="char2" disabled="disabled"/><br /><br />
+                <label for="energ">Энергия</label>
+                <input type="text" id="energ" /><br /> Тип:<input type="text" id="energ2" disabled="disabled"/><br /><br />
+                <label for="int">Интерес</label>
+                <input type="text" id="int" /><br /> Тип:<input type="text" id="int2" disabled="disabled"/><br /><br />
+                <label for="welln">Здоровье</label>
+                <input type="text" id="welln" /><br /> Тип:<input type="text" id="welln2" disabled="disabled"/><br /><br />
+                <label for="log">Логика</label>
+                <input type="text" id="log" /><br /> Тип:<input type="text" id="log2" disabled="disabled"/><br /><br />
+                <label for="tr">Труд</label>
+                <input type="text" id="tr" /><br /> Тип:<input type="text" id="tr2" disabled="disabled"/><br /><br />
+                <label for="udach">Удача</label>
+                <input type="text" id="udach" /><br /> Тип:<input type="text" id="udach2" disabled="disabled"/><br /><br />
+                <label for="dolg">Долг</label>
+                <input type="text" id="dolg" /><br /> Тип:<input type="text" id="dolg2" disabled="disabled"/><br /><br />
+                <label for="pam">Память</label>
+                <input type="text" id="pam" /><br /> Тип:<input type="text" id="pam2" disabled="disabled"/><br /><br />
+                <label for="byt">Быт</label>
+                <input type="text" id="byt" /><br /> Тип:<input type="text" id="byt2" disabled="disabled"/><br /><br />
+
+                <button id="submit_btn">Рассчитать</button>
+            </div>
+            <div style="margin-left: 40px" id="itogi">
+                <h2>Итоги:</h2>
+            </div>
+        </div>
+        <script>
+            
+
+            let temp = document.querySelector("#temp");
+            let temp2 = document.querySelector("#temp2");
+
+            let cel = document.querySelector("#cel");
+            let cel2 = document.querySelector("#cel2");
+
+            let priv = document.querySelector("#priv");
+            let priv2 = document.querySelector("#priv2");
+
+            let fam = document.querySelector("#fam");
+            let fam2 = document.querySelector("#fam2");
+
+            let char = document.querySelector("#char");
+            let char2 = document.querySelector("#char2");
+
+            let energ = document.querySelector("#energ");
+            let energ2 = document.querySelector("#energ2");
+
+            let int = document.querySelector("#int");
+            let int2 = document.querySelector("#int2");
+
+            let welln = document.querySelector("#welln");
+            let welln2 = document.querySelector("#welln2");
+
+            let log = document.querySelector("#log");
+            let log2 = document.querySelector("#log2");
+
+            let tr = document.querySelector("#tr");
+            let tr2 = document.querySelector("#tr2");
+
+            let udach = document.querySelector("#udach");
+            let udach2 = document.querySelector("#udach2");
+
+            let dolg = document.querySelector("#dolg");
+            let dolg2 = document.querySelector("#dolg2");
+
+            let pam = document.querySelector("#pam");
+            let pam2 = document.querySelector("#pam2");
+
+            let byt = document.querySelector("#byt");
+            let byt2 = document.querySelector("#byt2");
+
+            let button = document.querySelector("#submit_btn");
+
+            let itogi = document.querySelector("#itogi");
+
+
+            button.addEventListener("click", (event) => {
+                event.preventDefault();
+                let kubki_out = 0;
+                let kubki_in = 0;
+
+                let pent_out = 0;
+                let pent_in = 0;
+
+                let gezl_out = 0;
+                let gezl_in = 0;
+
+                let mechi_out = 0;
+                let mechi_in = 0;
+
+                let korol_out = 0;
+                let korol_in = 0;
+
+                let pag_out = 0;
+                let pag_in = 0;
+                switch (cel.value) {
+                    case "1":
+                        cel2.value = "Паж пентаклей";
+                        pent_out++;
+                        pag_out++;
+                        break;
+                    case "2":
+                        cel2.value = "Паж пентаклей";
+                        pent_out++;
+                        pag_out++;
+                        break;
+                    case "3":
+                        cel2.value = "Паж пентаклей";
+                        pent_out++;
+                        pag_out++;
+                        break;
+                    case "4":
+                        cel2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "5":
+                        cel2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "6":
+                        cel2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "7":
+                        cel2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "8":
+                        cel2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "9":
+                        cel2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                }
+
+                switch (temp.value) {
+                    case "1":
+                        temp2.value = "Паж кубков";
+                        kubki_out++;
+                        pag_out++;
+                        break;
+                    case "-":
+                        temp2.value = "Паж кубков";
+                        kubki_out++;
+                        pag_out++;
+                        break;
+                    case "2":
+                        temp2.value = "Паж пентаклей";
+                        pent_out++;
+                        pag_out++;
+                        break;
+                    case "3":
+                        temp2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "4":
+                        temp2.value = "Королева кубков";
+                        kubki_out++;
+                        korol_out++;
+                        break;
+                    case "5":
+                        temp2.value = "Королева кубков";
+                        kubki_out++;
+                        korol_out++;
+                        break;
+                    case "6":
+                        temp2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                    case "7":
+                        temp2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                    case "8":
+                        temp2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                }
+
+                switch (fam.value) {
+                    case "1":
+                        fam2.value = "Паж кубков";
+                        kubki_out++;
+                        pag_out++;
+                        break;
+                    case "-":
+                        fam2.value = "Паж кубков";
+                        kubki_out++;
+                        pag_out++;
+                        break;
+                    case "2":
+                        fam2.value = "Паж кубков";
+                        kubki_out++;
+                        pag_out++;
+                        break;
+                    case "3":
+                        fam2.value = "Паж мечей";
+                        mechi_out++;
+                        pag_out++;
+                        break;
+                    case "4":
+                        fam2.value = "Королева кубков";
+                        kubki_out++;
+                        korol_out++;
+                        break;
+                    case "5":
+                        fam2.value = "Королева кубков";
+                        kubki_out++;
+                        korol_out++;
+                        break;
+                    case "6":
+                        fam2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "7":
+                        fam2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "8":
+                        fam2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                }
+                switch (priv.value) {
+                    case "1":
+                        priv2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "2":
+                        priv2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "3":
+                        priv2.value = "Королева жезлов";
+                        gezl_out++;
+                        korol_out++;
+                        break;
+                    case "4":
+                        priv2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "5":
+                        priv2.value = "Королева пентаклей";
+                        pent_out++;
+                        korol_out++;
+                        break;
+                    case "6":
+                        priv2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                    case "7":
+                        priv2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                    case "8":
+                        priv2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                    case "9":
+                        priv2.value = "Королева мечей";
+                        mechi_out++;
+                        korol_out++;
+                        break;
+                }
+                //Внутренний квадрат
+
+                switch (char.value) {
+                    case "1":
+                        char2.value = "Паж пентаклей";
+                        pent_in++;
+                        pag_in++;
+                        break;
+                    case "11":
+                        char2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "111":
+                        char2.value = "Королева мечей/жезлов";
+                        gezl_in++;
+                        mechi_in++;
+                        korol_in++;
+                        korol_in++;
+                        break;
+                    case "1111":
+                        char2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "11111":
+                        char2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "111111":
+                        char2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "1111111":
+                        char2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "11111111":
+                        char2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                }
+                
+                switch (energ.value) {
+                    case "-":
+                        energ2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "2":
+                        energ2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "22":
+                        energ2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "2222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "22222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "222222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "2222222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "22222222":
+                        energ2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (int.value) {
+                    case "-":
+                        int2.value = "Паж кубков/жезлов";
+                        kubki_in++;
+                        gezl_in++;
+                        pag_in++;
+                        pag_in++;
+                        break;
+                    case "3":
+                        int2.value = "Паж кубков/жезлов";
+                        kubki_in++;
+                        gezl_in++;
+                        pag_in++;
+                        pag_in++;
+                        break;
+                    case "33":
+                        int2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "3333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "33333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "333333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "3333333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "33333333":
+                        int2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (welln.value) {
+                    case "-":
+                        welln2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "4":
+                        welln2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "44":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "4444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "44444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "444444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "4444444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "44444444":
+                        welln2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (log.value) {
+                    case "-":
+                        log2.value = "Королева кубков/мечей";
+                        kubki_in++;
+                        mechi_in++;
+                        korol_in++;
+                        korol_in++;
+                        break;
+                    case "5":
+                        log2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "55":
+                        log2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "555":
+                        log2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "5555":
+                        log2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (tr.value) {
+                    case "-":
+                        tr2.value = "Паж мечей";
+                        mechi_in++;
+                        pag_in++;
+                        break;
+                    case "6":
+                        tr2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "66":
+                        tr2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "666":
+                        tr2.value = "Королева мечей/жезлов";
+                        mechi_in++;
+                        gezl_in++;
+                        korol_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (udach.value) {
+                    case "-":
+                        udach2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "7":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "77":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "7777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "77777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "777777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "7777777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "77777777":
+                        udach2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (dolg.value) {
+                    case "-":
+                        dolg2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "8":
+                        dolg2.value = "Паж кубков";
+                        kubki_in++;
+                        pag_in++;
+                        break;
+                    case "88":
+                        dolg2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "888":
+                        dolg2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "8888":
+                        dolg2.value = "Королева кубков";
+                        kubki_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (pam.value) {
+                    case "-":
+                        pam2.value = "Паж мечей";
+                        mechi_in++;
+                        pag_in++;
+                        break;
+                    case "9":
+                        pam2.value = "Паж мечей";
+                        mechi_in++;
+                        pag_in++;
+                        break;
+                    case "99":
+                        pam2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "999":
+                        pam2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                    case "9999":
+                        pam2.value = "Королева мечей";
+                        mechi_in++;
+                        korol_in++;
+                        break;
+                }
+                switch (byt.value) {
+                    case "-":
+                        byt2.value = "Паж пентаклей";
+                        pent_in++;
+                        pag_in++;
+                        break;
+                    case "1":
+                        byt2.value = "Паж пентаклей";
+                        pent_in++;
+                        pag_in++;
+                        break;
+                    case "2":
+                        byt2.value = "Паж пентаклей";
+                        pent_in++;
+                        pag_in++;
+                        break;
+                    case "3":
+                        byt2.value = "Королева жезлов";
+                        gezl_in++;
+                        korol_in++;
+                        break;
+                    case "4":
+                        byt2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "5":
+                        byt2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                    case "6":
+                        byt2.value = "Королева пентаклей";
+                        pent_in++;
+                        korol_in++;
+                        break;
+                }
+                itogi.innerHTML = `<h2>Итоги:</h2>
+                <h3>Внешний квадрат</h3>
+                <span><strong>Кубки:</strong> ${kubki_out}</span><br />
+                <span><strong>Пентакли:</strong> ${pent_out}</span><br />
+                <span><strong>Жезлы:</strong> ${gezl_out}</span><br />
+                <span><strong>Мечи:</strong> ${mechi_out}</span><br /><br />
+                <span><strong>Королевы:</strong> ${korol_out}</span><br />
+                <span><strong>Пажи:</strong> ${pag_out}</span>
+                
+                <h3>Внутренний квадрат (Вся таблица)</h3>
+                <span><strong>Кубки:</strong> ${kubki_out + kubki_in}</span><br />
+                <span><strong>Пентакли:</strong> ${pent_out + pent_in}</span><br />
+                <span><strong>Жезлы:</strong> ${gezl_out + gezl_in}</span><br />
+                <span><strong>Мечи:</strong> ${mechi_out + mechi_in}</span><br /><br />
+                <span><strong>Королевы:</strong> ${korol_out + korol_in}</span><br />
+                <span><strong>Пажи:</strong> ${pag_out + pag_in}</span><br />
+                `;
+                window.scrollTo(0, 0);
+            });
+        </script>
+    </body>
+</html>
