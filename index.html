@@ -7,7 +7,9 @@
     </head>
     <body>
         <style>
-
+            html{
+                /*scroll-behavior: smooth;*/
+            }
             body{
                 background-color: #fad2df;
                 color: #85354f;
@@ -29,10 +31,11 @@
                 margin-top: 3px;
                 border-radius: 3px;
                 color: #85354f;
+            
             }
             button{
                 background-color: #fad2df;
-                border-color: #85354f;
+                border-color: #ce849b;
                 color: #85354f;
                 padding: 10px 20px;
                 cursor: pointer;
@@ -41,47 +44,49 @@
             }
             button:hover{
                 box-shadow: 7px 3px 3px #49202d;
-                background-color: #d6a5b4;
+                background-color: #ca95a5;
             }
-
+            .type{
+                display: none;
+            }
         </style>
 
         <h2>Расчёт для женщин</h2>
-        <p><i>(Введите значения из таблицы. Где стоит прочерк, поставьте "-" Поля "Тип" оставьте пустыми, они заполнятся автоматически)</i></p>
+        <p><i>(Введите значения из таблицы. Где стоит прочерк, поставьте "-")</i></p>
         <div class="container">
             <div>
                 
                 <h3>Внешний квадрат</h3>
                 <label for="temp">Темперамент</label>
-                <input type="text" id="temp" /><br /> Тип:<input type="text" id="temp2" disabled="disabled"/><br /><br />
+                <input type="text" id="temp" /><br /> Тип:<input type="text" id="temp2" disabled="disabled" class="type"/><br /><br />
                 <label for="cel">Цель</label>
-                <input type="text" id="cel" /><br />Тип:<input type="text" id="cel2" disabled="disabled"/><br /><br />
+                <input type="text" id="cel" /><br />Тип:<input type="text" id="cel2" disabled="disabled" class="type"/><br /><br />
                 <label for="fam">Семья</label>
-                <input type="text" id="fam" /><br />Тип:<input type="text" id="fam2" disabled="disabled"/><br /><br />
+                <input type="text" id="fam" /><br />Тип:<input type="text" id="fam2" disabled="disabled" class="type"/><br /><br />
                 <label for="priv">Привычки</label>
-                <input type="text" id="priv" /><br />Тип:<input type="text" id="priv2" disabled="disabled"/>
+                <input type="text" id="priv" /><br />Тип:<input type="text" id="priv2" disabled="disabled" class="type"/>
 
                 <h3>Внутренний квадрат</h3>
                 <label for="char">Характер</label>
-                <input type="text" id="char" /><br /> Тип:<input type="text" id="char2" disabled="disabled"/><br /><br />
+                <input type="text" id="char" /><br /> Тип:<input type="text" id="char2" disabled="disabled" class="type"/><br /><br />
                 <label for="energ">Энергия</label>
-                <input type="text" id="energ" /><br /> Тип:<input type="text" id="energ2" disabled="disabled"/><br /><br />
+                <input type="text" id="energ" /><br /> Тип:<input type="text" id="energ2" disabled="disabled" class="type"/><br /><br />
                 <label for="int">Интерес</label>
-                <input type="text" id="int" /><br /> Тип:<input type="text" id="int2" disabled="disabled"/><br /><br />
+                <input type="text" id="int" /><br /> Тип:<input type="text" id="int2" disabled="disabled" class="type"/><br /><br />
                 <label for="welln">Здоровье</label>
-                <input type="text" id="welln" /><br /> Тип:<input type="text" id="welln2" disabled="disabled"/><br /><br />
+                <input type="text" id="welln" /><br /> Тип:<input type="text" id="welln2" disabled="disabled" class="type"/><br /><br />
                 <label for="log">Логика</label>
-                <input type="text" id="log" /><br /> Тип:<input type="text" id="log2" disabled="disabled"/><br /><br />
+                <input type="text" id="log" /><br /> Тип:<input type="text" id="log2" disabled="disabled" class="type"/><br /><br />
                 <label for="tr">Труд</label>
-                <input type="text" id="tr" /><br /> Тип:<input type="text" id="tr2" disabled="disabled"/><br /><br />
+                <input type="text" id="tr" /><br /> Тип:<input type="text" id="tr2" disabled="disabled" class="type"/><br /><br />
                 <label for="udach">Удача</label>
-                <input type="text" id="udach" /><br /> Тип:<input type="text" id="udach2" disabled="disabled"/><br /><br />
+                <input type="text" id="udach" /><br /> Тип:<input type="text" id="udach2" disabled="disabled" class="type"/><br /><br />
                 <label for="dolg">Долг</label>
-                <input type="text" id="dolg" /><br /> Тип:<input type="text" id="dolg2" disabled="disabled"/><br /><br />
+                <input type="text" id="dolg" /><br /> Тип:<input type="text" id="dolg2" disabled="disabled" class="type"/><br /><br />
                 <label for="pam">Память</label>
-                <input type="text" id="pam" /><br /> Тип:<input type="text" id="pam2" disabled="disabled"/><br /><br />
+                <input type="text" id="pam" /><br /> Тип:<input type="text" id="pam2" disabled="disabled" class="type"/><br /><br />
                 <label for="byt">Быт</label>
-                <input type="text" id="byt" /><br /> Тип:<input type="text" id="byt2" disabled="disabled"/><br /><br />
+                <input type="text" id="byt" /><br /> Тип:<input type="text" id="byt2" disabled="disabled" class="type"/><br /><br />
 
                 <button id="submit_btn">Рассчитать</button>
             </div>
@@ -141,6 +146,9 @@
 
             button.addEventListener("click", (event) => {
                 event.preventDefault();
+                window.scrollTo(0, 0);
+                let array = Array.from(document.querySelectorAll('.type'));
+                array.forEach(el => el.style.display = "inline-block");
                 let kubki_out = 0;
                 let kubki_in = 0;
 
@@ -748,7 +756,7 @@
                 <span><strong>Королевы:</strong> ${korol_out + korol_in}</span><br />
                 <span><strong>Пажи:</strong> ${pag_out + pag_in}</span><br />
                 `;
-                window.scrollTo(0, 0);
+                
             });
         </script>
     </body>
